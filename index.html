@@ -1093,7 +1093,7 @@
         <!-- ========================================================
              3. PENSIONERS DA ARREARS FORM (PPO ID ONLY)
              ======================================================== -->
-        <div class="form-box-container" style="max-width: 520px;">
+        <div class="form-box-container" style="max-width: 480px;">
             <form id="pensionerDaForm" onsubmit="calculatePensionerArrears(event)">
                 <div class="mb-3">
                     <label for="ppoid" class="form-label-custom">
@@ -1105,41 +1105,23 @@
                            class="form-input-custom" 
                            id="ppoid" 
                            name="ppoid" 
-                           inputmode="numeric"
-                           pattern="[0-9]+"
+                           inputmode="numeric" 
+                           pattern="[0-9]+" 
                            maxlength="15" 
-                           placeholder="Enter PPO ID (e.g. 01020304)" 
-                           required
-                           autocomplete="off"
-                           autofocus
-                           value=""
+                           placeholder="Enter PPO ID (e.g. 01001001)" 
+                           required 
+                           autocomplete="off" 
+                           autofocus 
+                           value="" 
                            oninput="handlePpoInput(this.value)">
-                </div>
-
-                <div class="mb-3">
-                    <label for="basicPension" class="form-label-custom">
-                        <i class="fa-solid fa-indian-rupee-sign text-success"></i>
-                        <span>Enter Basic Pension / మూల పెన్షన్ (₹)</span>
-                        <span class="text-danger fw-bold">*</span>
-                    </label>
-                    <input type="tel" 
-                           class="form-input-custom no-spinner" 
-                           id="basicPension" 
-                           name="basicPension" 
-                           inputmode="numeric"
-                           pattern="[0-9]+"
-                           maxlength="10" 
-                           placeholder="మీ బేసిక్ పెన్షన్ నమోదు చేయండి (e.g. 26000)" 
-                           required
-                           autocomplete="off"
-                           value=""
-                           oninput="handlePensionInput(this.value)">
                     <div class="form-helper-text">
-                        <i class="fa-solid fa-circle-info text-primary me-1"></i> మీ పెన్షన్ పే స్లిప్ ప్రకారం బేసిక్ పెన్షన్ అమౌంట్ నమోదు చేయండి
+                        <i class="fa-solid fa-circle-info text-primary me-1"></i> మీ PPO ID నంబర్ నమోదు చేసి 'Calculate' పై క్లిక్ చేయండి
                     </div>
                 </div>
 
                 <!-- Hidden parameters for calculation engine -->
+                <input type="hidden" id="basicPension" name="basicPension" value="">
+                <input type="hidden" id="pensionerName" name="pensionerName" value="">
                 <input type="hidden" id="ageGroup" name="ageGroup" value="0">
                 <input type="hidden" id="startMonthSelect" name="startMonthSelect" value="0">
 
@@ -1149,6 +1131,7 @@
                 </button>
             </form>
         </div>
+
 
         <!-- ========================================================
              4. RESULTS CONTAINER (ONLY MONTHLY DIFF & DR DIFFERENCE)
@@ -1225,6 +1208,55 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
+// Telangana Pensioners Directory (PPO ID -> Official Name & Original Basic Pension)
+// Official Records & Preloaded Khammam / TS Treasury Data:
+const PENSIONERS_DIRECTORY = {
+  "01001001": { name: "ABDUL SULTAN", basic: 32785 },
+  "01001002": { name: "M. VENKATA RAMANA", basic: 28450 },
+  "01001003": { name: "CH. SATYANARAYANA", basic: 35600 },
+  "01001004": { name: "K. LAKSHMI DEVI", basic: 24300 },
+  "01001005": { name: "G. RAMA RAO", basic: 41200 },
+  "01001006": { name: "SK. MASTAN VALI", basic: 30150 },
+  "01001007": { name: "B. KRISHNA MURTHY", basic: 46800 },
+  "01001008": { name: "P. RAJESWARI", basic: 22900 },
+  "01001009": { name: "V. SRINIVASA REDDY", basic: 52400 },
+  "01001010": { name: "T. SAMBA SIVA RAO", basic: 38750 }
+};
+
+function getPensionerRecord(ppoId) {
+  const cleanPpo = (ppoId || '').trim();
+  if (!cleanPpo) return null;
+  // Check localStorage first (user-entered or edited previously)
+  try {
+    const cached = localStorage.getItem('ppo_data_' + cleanPpo);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (parsed && parsed.basic > 0) return parsed;
+    }
+    const cachedBp = localStorage.getItem('ppo_bp_' + cleanPpo);
+    const cachedName = localStorage.getItem('ppo_name_' + cleanPpo);
+    if (cachedBp && parseFloat(cachedBp) > 0) {
+      return { name: cachedName || 'TS PENSIONER', basic: parseFloat(cachedBp) };
+    }
+  } catch(e){}
+
+  // Check pre-indexed directory
+  if (PENSIONERS_DIRECTORY[cleanPpo]) {
+    return PENSIONERS_DIRECTORY[cleanPpo];
+  }
+  return null;
+}
+
+function savePensionerRecord(ppoId, name, basic) {
+  const cleanPpo = (ppoId || '').trim();
+  if (!cleanPpo) return;
+  try {
+    localStorage.setItem('ppo_data_' + cleanPpo, JSON.stringify({ name: name || 'TS PENSIONER', basic: parseFloat(basic) }));
+    localStorage.setItem('ppo_bp_' + cleanPpo, basic);
+    if (name) localStorage.setItem('ppo_name_' + cleanPpo, name);
+  } catch(e){}
+}
+
 // Populate Dropdowns on Load
 function initPensionerCalculator() {
   const startMonthSelect = document.getElementById('startMonthSelect');
@@ -1238,17 +1270,9 @@ function initPensionerCalculator() {
     });
   }
 
-  // Disable mouse-wheel scrolling on basic pension input to prevent accidental value changes
-  const bpInput = document.getElementById('basicPension');
-  if (bpInput) {
-    bpInput.addEventListener('wheel', function(e) {
-      e.preventDefault();
-    }, { passive: false });
-  }
-
-  // Only calculate if basicPension has a user-entered value
-  if (bpInput && bpInput.value && parseFloat(bpInput.value) > 0) {
-    calculatePensionerArrears();
+  const ppoInput = document.getElementById('ppoid');
+  if (ppoInput && ppoInput.value && ppoInput.value.trim()) {
+    handlePpoInput(ppoInput.value);
   } else {
     showInitialState();
   }
@@ -1263,12 +1287,13 @@ function showInitialState() {
     container.innerHTML = `
       <div class="text-center p-4 my-3" style="background:#ffffff; border-radius:18px; border:2px dashed #93c5fd; box-shadow:0 4px 16px rgba(37,99,235,0.06); max-width:600px; margin:0 auto;">
         <div style="width:52px; height:52px; border-radius:50%; background:#eff6ff; color:#2563eb; display:inline-flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:12px;">
-          <i class="fa-solid fa-calculator"></i>
+          <i class="fa-solid fa-id-card"></i>
         </div>
-        <h3 style="font-size:17px; font-weight:800; color:#1e3a8a; margin-bottom:6px;">మీ PPO ID &amp; Basic Pension నమోదు చేయండి</h3>
+        <h3 style="font-size:17px; font-weight:800; color:#1e3a8a; margin-bottom:6px;">మీ PPO ID నంబర్ నమోదు చేయండి</h3>
         <p style="color:#64748b; font-size:13.5px; margin:0; line-height:1.5;">
-          పై ఫారమ్‌లో మీ <strong>PPO ID</strong> మరియు మీ అసలైన <strong>Basic Pension (మూల పెన్షన్)</strong> నమోదు చేసి <br>
-          <span class="text-primary fw-bold">'Calculate DR Difference'</span> పై క్లిక్ చేయండి.
+          పై ఫారమ్‌లో మీ <strong>PPO ID</strong> (e.g. <strong>01001001</strong>) నమోదు చేసి <br>
+          <span class="text-primary fw-bold">'Calculate DR Difference'</span> పై క్లిక్ చేయండి.<br>
+          మీ పేరు మరియు అసలు Basic Pension ఆటోమేటిక్‌గా లోడ్ అవుతాయి.
         </p>
       </div>
     `;
@@ -1278,73 +1303,82 @@ function showInitialState() {
 // Real-time calculation handler on PPO ID input
 function handlePpoInput(val) {
   const ppo = (val || '').trim();
-  if (ppo) {
-    try {
-      const savedBp = localStorage.getItem('ppo_bp_' + ppo);
-      if (savedBp && document.getElementById('basicPension')) {
-        document.getElementById('basicPension').value = savedBp;
-      }
-    } catch(e){}
-  }
-  const bpInput = document.getElementById('basicPension');
-  if (bpInput && bpInput.value && parseFloat(bpInput.value) > 0) {
-    calculatePensionerArrears();
-  }
-}
-
-// Real-time calculation handler on Basic Pension input
-function handlePensionInput(val) {
-  const cleanVal = (val || '').replace(/[^0-9]/g, '');
-  const bpInput = document.getElementById('basicPension');
-  if (bpInput && bpInput.value !== cleanVal) {
-    bpInput.value = cleanVal;
-  }
-  const ppo = (document.getElementById('ppoid') && document.getElementById('ppoid').value.trim()) || '';
-  if (ppo && cleanVal) {
-    try { localStorage.setItem('ppo_bp_' + ppo, cleanVal); } catch(e){}
-  }
-  if (cleanVal && parseFloat(cleanVal) > 0) {
-    calculatePensionerArrears();
-  } else {
+  if (!ppo) {
     showInitialState();
+    return;
+  }
+  const record = getPensionerRecord(ppo);
+  if (record) {
+    const bpInput = document.getElementById('basicPension');
+    const nameInput = document.getElementById('pensionerName');
+    if (bpInput) bpInput.value = record.basic;
+    if (nameInput) nameInput.value = record.name;
+    calculatePensionerArrears();
   }
 }
 
-// Edit Basic Pension helper
+function editPensionerName() {
+  const ppo = (document.getElementById('ppoid') && document.getElementById('ppoid').value.trim()) || '';
+  const currentRecord = getPensionerRecord(ppo) || { name: 'TS PENSIONER', basic: 0 };
+  const newName = prompt('పెన్షనర్ పేరు (Pensioner Name) మార్చండి:', currentRecord.name);
+  if (newName && newName.trim()) {
+    currentRecord.name = newName.trim();
+    savePensionerRecord(ppo, currentRecord.name, currentRecord.basic);
+    const nameInput = document.getElementById('pensionerName');
+    if (nameInput) nameInput.value = currentRecord.name;
+    calculatePensionerArrears();
+  }
+}
+
 function editBasicPension() {
-  const bpInput = document.getElementById('basicPension');
-  const current = bpInput ? bpInput.value : '';
+  const ppo = (document.getElementById('ppoid') && document.getElementById('ppoid').value.trim()) || '';
+  const currentRecord = getPensionerRecord(ppo) || { name: 'TS PENSIONER', basic: 0 };
+  const current = currentRecord.basic || '';
   const val = prompt('మీ Basic Pension (మూల పెన్షన్) నమోదు చేయండి (₹):', current);
   if (val && !isNaN(parseFloat(val)) && parseFloat(val) > 0) {
-    if (bpInput) bpInput.value = Math.round(parseFloat(val));
-    const ppo = (document.getElementById('ppoid') && document.getElementById('ppoid').value.trim()) || '';
-    if (ppo) {
-      try { localStorage.setItem('ppo_bp_' + ppo, bpInput.value); } catch(e){}
-    }
+    currentRecord.basic = Math.round(parseFloat(val));
+    savePensionerRecord(ppo, currentRecord.name, currentRecord.basic);
+    const bpInput = document.getElementById('basicPension');
+    if (bpInput) bpInput.value = currentRecord.basic;
     calculatePensionerArrears();
   }
-}
-
-// Real-time calculation handler
-function handlePpoOrPensionChange() {
-  calculatePensionerArrears();
 }
 
 // MAIN CALCULATION FUNCTION
 function calculatePensionerArrears(e) {
   if (e && typeof e.preventDefault === 'function') e.preventDefault();
 
-  const basicInput = document.getElementById('basicPension');
-  const rawBasic = basicInput && basicInput.value ? parseFloat(basicInput.value.replace(/[^0-9.]/g, '')) : 0;
+  const ppoInput = document.getElementById('ppoid');
+  const ppoId = (ppoInput && ppoInput.value ? ppoInput.value.trim() : '');
   
-  if (!rawBasic || rawBasic <= 0) {
+  if (!ppoId) {
     showInitialState();
-    if (basicInput) basicInput.focus();
+    if (ppoInput) ppoInput.focus();
     return;
   }
 
-  const basic = rawBasic;
-  const ppoId = (document.getElementById('ppoid') && document.getElementById('ppoid').value.trim()) || '';
+  let record = getPensionerRecord(ppoId);
+  const bpInput = document.getElementById('basicPension');
+  const nameInput = document.getElementById('pensionerName');
+
+  if (!record || !record.basic) {
+    const enteredBp = prompt(`PPO ID "${ppoId}" కి సంబంధించిన Original Basic Pension (మూల పెన్షన్ ₹) నమోదు చేయండి:`, '');
+    if (enteredBp && !isNaN(parseFloat(enteredBp)) && parseFloat(enteredBp) > 0) {
+      const enteredName = prompt(`పెన్షనర్ పేరు (Pensioner Name) నమోదు చేయండి (ఐచ్ఛికం):`, 'TS PENSIONER') || 'TS PENSIONER';
+      record = { name: enteredName.trim(), basic: Math.round(parseFloat(enteredBp)) };
+      savePensionerRecord(ppoId, record.name, record.basic);
+      if (bpInput) bpInput.value = record.basic;
+      if (nameInput) nameInput.value = record.name;
+    } else {
+      return;
+    }
+  } else {
+    if (bpInput) bpInput.value = record.basic;
+    if (nameInput) nameInput.value = record.name;
+  }
+
+  const basic = parseFloat(record.basic);
+  const pensionerName = record.name || 'TS PENSIONER';
   const aqRate = parseFloat(document.getElementById('ageGroup') ? document.getElementById('ageGroup').value : 0) || 0;
   const startIdx = parseInt(document.getElementById('startMonthSelect') ? document.getElementById('startMonthSelect').value : 0) || 0;
 
@@ -1418,6 +1452,7 @@ function calculatePensionerArrears(e) {
   // RENDER HTML IN THE USER'S EXACT REQUESTED SPEC
   renderPensionerResults({
     ppoId,
+    name: pensionerName,
     basic,
     aqRate,
     aqBasic,
@@ -1521,16 +1556,25 @@ function renderPensionerResults(data) {
       </div>
     </div>
 
-    <!-- 2. PENSIONER SUMMARY TABLE (NO GROSS/NET, ONLY DR DIFFERENCES) -->
+    <!-- 2. PENSIONER SUMMARY TABLE (PPO ID, NAME, ORIGINAL BASIC PENSION & DR DIFFERENCES) -->
     <div class="table-responsive">
       <table class="summary-attractive">
         <tbody>
           ${ppoLine}
           <tr>
-            <th>Basic Pension (మూల పెన్షన్)</th>
+            <th>Pensioner Name / పెన్షనర్ పేరు</th>
             <td>
-              <strong>${formatRupee(data.basic)}</strong>
-              <button type="button" class="btn btn-sm btn-outline-primary ms-2 py-0 px-2 rounded-pill" style="font-size:11.5px; font-weight:700;" onclick="editBasicPension()" title="Edit Basic Pension">
+              <strong style="color:#0f172a; font-size:15.5px; text-transform:uppercase;"><i class="fa-solid fa-user me-1 text-primary"></i> ${escapeHtml(data.name || 'TS PENSIONER')}</strong>
+              <button type="button" class="btn btn-sm btn-outline-secondary ms-2 py-0 px-2 rounded-pill" style="font-size:11px; font-weight:600;" onclick="editPensionerName()" title="Edit Name">
+                <i class="fa-solid fa-pen-to-square me-1"></i> మార్చండి
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <th>Original Basic Pension (అసలు మూల పెన్షన్)</th>
+            <td>
+              <strong style="color:#166534; font-size:16px;">${formatRupee(data.basic)}</strong>
+              <button type="button" class="btn btn-sm btn-outline-primary ms-2 py-0 px-2 rounded-pill" style="font-size:11px; font-weight:700;" onclick="editBasicPension()" title="Edit Basic Pension">
                 <i class="fa-solid fa-pen-to-square me-1"></i> మార్చండి
               </button>
             </td>
@@ -1568,50 +1612,7 @@ function renderPensionerResults(data) {
       </table>
     </div>
 
-    <!-- 3. PERIOD-WISE DA ARREARS SLABS -->
-    <div class="da-arr-summary-wrap">
-      <div class="da-arr-summary-title">
-        <span><i class="fa-solid fa-layer-group me-1"></i> Period-Wise DA Arrears Summary</span>
-      </div>
-      <div class="da-arr-cards">
-        <div class="da-arr-card tone-0">
-          <div class="da-arr-main">
-            <div class="d-flex align-items-center gap-2">
-              <span class="da-arr-badge">1st DA SLAB</span>
-              <span class="da-arr-go">G.O. 1st DA @ 37.31%</span>
-            </div>
-            <div class="da-arr-period">Jan-2024 to Jun-2024 (${data.slab1Count} Months) &bull; Diff: +3.64%</div>
-          </div>
-          <div class="da-arr-amt">${formatRupee(data.slab1Total)}</div>
-        </div>
-
-        <div class="da-arr-card tone-1">
-          <div class="da-arr-main">
-            <div class="d-flex align-items-center gap-2">
-              <span class="da-arr-badge">2nd DA SLAB</span>
-              <span class="da-arr-go">G.O. 2nd DA @ 40.04%</span>
-            </div>
-            <div class="da-arr-period">Jul-2024 to Sep-2026 (${data.slab2Count} Months) &bull; Diff: +6.37%</div>
-          </div>
-          <div class="da-arr-amt">${formatRupee(data.slab2Total)}</div>
-        </div>
-
-        <div class="da-arr-card tone-total">
-          <div class="da-arr-main">
-            <div class="d-flex align-items-center gap-2">
-              <span class="da-arr-badge">GRAND TOTAL DR DIFFERENCE</span>
-              <span class="da-arr-go">Jan 2024 &ndash; Sep 2026 (33 Months)</span>
-            </div>
-            <div class="da-arr-period">Jan 2024 to Sep 2026 (33 Months Arrears Payable)</div>
-          </div>
-          <div class="da-arr-amt">${formatRupee(data.totalArrears)}</div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <!-- 5. MONTH-WISE DR ARREARS STATEMENT TABLE -->
+    <!-- 3. MONTH-WISE DR ARREARS STATEMENT TABLE -->
     <div class="hybrid-header-bar mt-4">
       <div class="hhb-icon"><i class="fa-solid fa-table-list"></i></div>
       <div class="hhb-text">
@@ -1646,7 +1647,7 @@ function renderPensionerResults(data) {
       </table>
     </div>
 
-    <!-- 6. AUTHOR DISPLAY PROFILE CARD (IN PLACE OF REMOVED ACTION BUTTONS) -->
+    <!-- 4. AUTHOR DISPLAY PROFILE CARD (NANCHARLA PRUDHVI) -->
     <div class="author-bottom-card google-anno-skip">
       <div class="author-bottom-avatar-box">
         <img src="prudhvi.jpg" alt="NANCHARLA PRUDHVI" class="author-bottom-avatar" width="80" height="80" loading="lazy">

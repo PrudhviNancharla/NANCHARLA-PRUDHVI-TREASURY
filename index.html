@@ -1093,7 +1093,7 @@
         <!-- ========================================================
              3. PENSIONERS DA ARREARS FORM (PPO ID ONLY)
              ======================================================== -->
-        <div class="form-box-container" style="max-width: 500px;">
+        <div class="form-box-container" style="max-width: 520px;">
             <form id="pensionerDaForm" onsubmit="calculatePensionerArrears(event)">
                 <div class="mb-3">
                     <label for="ppoid" class="form-label-custom">
@@ -1114,13 +1114,32 @@
                            autofocus
                            value=""
                            oninput="handlePpoInput(this.value)">
+                </div>
+
+                <div class="mb-3">
+                    <label for="basicPension" class="form-label-custom">
+                        <i class="fa-solid fa-indian-rupee-sign text-success"></i>
+                        <span>Enter Basic Pension / మూల పెన్షన్ (₹)</span>
+                        <span class="text-danger fw-bold">*</span>
+                    </label>
+                    <input type="tel" 
+                           class="form-input-custom no-spinner" 
+                           id="basicPension" 
+                           name="basicPension" 
+                           inputmode="numeric"
+                           pattern="[0-9]+"
+                           maxlength="10" 
+                           placeholder="మీ బేసిక్ పెన్షన్ నమోదు చేయండి (e.g. 26000)" 
+                           required
+                           autocomplete="off"
+                           value=""
+                           oninput="handlePensionInput(this.value)">
                     <div class="form-helper-text">
-                        <i class="fa-solid fa-circle-info text-primary me-1"></i> మీ PPO ID నంబర్ నమోదు చేసి 'Calculate' పై క్లిక్ చేయండి
+                        <i class="fa-solid fa-circle-info text-primary me-1"></i> మీ పెన్షన్ పే స్లిప్ ప్రకారం బేసిక్ పెన్షన్ అమౌంట్ నమోదు చేయండి
                     </div>
                 </div>
 
                 <!-- Hidden parameters for calculation engine -->
-                <input type="hidden" id="basicPension" name="basicPension" value="30000">
                 <input type="hidden" id="ageGroup" name="ageGroup" value="0">
                 <input type="hidden" id="startMonthSelect" name="startMonthSelect" value="0">
 
@@ -1227,11 +1246,33 @@ function initPensionerCalculator() {
     }, { passive: false });
   }
 
-  // Calculate immediately so results are ready, WITHOUT auto-scrolling
-  calculatePensionerArrears();
+  // Only calculate if basicPension has a user-entered value
+  if (bpInput && bpInput.value && parseFloat(bpInput.value) > 0) {
+    calculatePensionerArrears();
+  } else {
+    showInitialState();
+  }
 
   // Ensure page always starts at top on initial load
   window.scrollTo(0, 0);
+}
+
+function showInitialState() {
+  const container = document.getElementById('resultsContainer');
+  if (container) {
+    container.innerHTML = `
+      <div class="text-center p-4 my-3" style="background:#ffffff; border-radius:18px; border:2px dashed #93c5fd; box-shadow:0 4px 16px rgba(37,99,235,0.06); max-width:600px; margin:0 auto;">
+        <div style="width:52px; height:52px; border-radius:50%; background:#eff6ff; color:#2563eb; display:inline-flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:12px;">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+        <h3 style="font-size:17px; font-weight:800; color:#1e3a8a; margin-bottom:6px;">మీ PPO ID &amp; Basic Pension నమోదు చేయండి</h3>
+        <p style="color:#64748b; font-size:13.5px; margin:0; line-height:1.5;">
+          పై ఫారమ్‌లో మీ <strong>PPO ID</strong> మరియు మీ అసలైన <strong>Basic Pension (మూల పెన్షన్)</strong> నమోదు చేసి <br>
+          <span class="text-primary fw-bold">'Calculate DR Difference'</span> పై క్లిక్ చేయండి.
+        </p>
+      </div>
+    `;
+  }
 }
 
 // Real-time calculation handler on PPO ID input
@@ -1245,15 +1286,36 @@ function handlePpoInput(val) {
       }
     } catch(e){}
   }
-  calculatePensionerArrears();
+  const bpInput = document.getElementById('basicPension');
+  if (bpInput && bpInput.value && parseFloat(bpInput.value) > 0) {
+    calculatePensionerArrears();
+  }
+}
+
+// Real-time calculation handler on Basic Pension input
+function handlePensionInput(val) {
+  const cleanVal = (val || '').replace(/[^0-9]/g, '');
+  const bpInput = document.getElementById('basicPension');
+  if (bpInput && bpInput.value !== cleanVal) {
+    bpInput.value = cleanVal;
+  }
+  const ppo = (document.getElementById('ppoid') && document.getElementById('ppoid').value.trim()) || '';
+  if (ppo && cleanVal) {
+    try { localStorage.setItem('ppo_bp_' + ppo, cleanVal); } catch(e){}
+  }
+  if (cleanVal && parseFloat(cleanVal) > 0) {
+    calculatePensionerArrears();
+  } else {
+    showInitialState();
+  }
 }
 
 // Edit Basic Pension helper
 function editBasicPension() {
-  const current = document.getElementById('basicPension') ? document.getElementById('basicPension').value : '30000';
+  const bpInput = document.getElementById('basicPension');
+  const current = bpInput ? bpInput.value : '';
   const val = prompt('మీ Basic Pension (మూల పెన్షన్) నమోదు చేయండి (₹):', current);
   if (val && !isNaN(parseFloat(val)) && parseFloat(val) > 0) {
-    const bpInput = document.getElementById('basicPension');
     if (bpInput) bpInput.value = Math.round(parseFloat(val));
     const ppo = (document.getElementById('ppoid') && document.getElementById('ppoid').value.trim()) || '';
     if (ppo) {
@@ -1273,7 +1335,15 @@ function calculatePensionerArrears(e) {
   if (e && typeof e.preventDefault === 'function') e.preventDefault();
 
   const basicInput = document.getElementById('basicPension');
-  const basic = Math.max(1000, parseFloat(basicInput && basicInput.value ? basicInput.value : 30000) || 30000);
+  const rawBasic = basicInput && basicInput.value ? parseFloat(basicInput.value.replace(/[^0-9.]/g, '')) : 0;
+  
+  if (!rawBasic || rawBasic <= 0) {
+    showInitialState();
+    if (basicInput) basicInput.focus();
+    return;
+  }
+
+  const basic = rawBasic;
   const ppoId = (document.getElementById('ppoid') && document.getElementById('ppoid').value.trim()) || '';
   const aqRate = parseFloat(document.getElementById('ageGroup') ? document.getElementById('ageGroup').value : 0) || 0;
   const startIdx = parseInt(document.getElementById('startMonthSelect') ? document.getElementById('startMonthSelect').value : 0) || 0;

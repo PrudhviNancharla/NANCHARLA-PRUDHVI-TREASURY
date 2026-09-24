@@ -1539,60 +1539,7 @@ function renderPensionerResults(data) {
       </div>
     </div>
 
-    <!-- 4. PERIOD-WISE SLAB ANALYSIS CARDS -->
-    <div class="hybrid-block mt-4">
-      <div class="hybrid-header-bar">
-        <div class="hhb-icon"><i class="fa-solid fa-timeline"></i></div>
-        <div class="hhb-text">
-          <h2 class="hhb-title">Period-Wise Slab Analysis</h2>
-          <span class="hhb-sub">To be Drawn vs Already Drawn vs Payable Arrears</span>
-        </div>
-      </div>
 
-      <!-- Slab 1 Card -->
-      <div class="hybrid-slab">
-        <div class="hybrid-slab-head">
-          <span class="hybrid-slab-badge">Slab 1</span>
-          <span class="hybrid-slab-meta">Jan-2024 to Jun-2024 (6 Months) &bull; 1st DA @ 37.31% (+3.64% Diff)</span>
-        </div>
-        <div class="hybrid-slab-body">
-          <div class="hybrid-row hybrid-col-tobe">
-            <span class="hl"><i class="fa-solid fa-file-circle-check"></i> To be Drawn (37.31%)</span>
-            <span class="hv-tobe">${formatRupee(data.da1DrAmt * data.slab1Count)}</span>
-          </div>
-          <div class="hybrid-row hybrid-col-drawn">
-            <span class="hl"><i class="fa-solid fa-clock-rotate-left"></i> Already Drawn (33.67%)</span>
-            <span class="hv-drawn">${formatRupee(data.drawnDrAmt * data.slab1Count)}</span>
-          </div>
-          <div class="hybrid-row hybrid-col-payable">
-            <span class="hl"><i class="fa-solid fa-hand-holding-dollar"></i> Net DR Arrears</span>
-            <span class="hv-payable">${formatRupee(data.slab1Total)}</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slab 2 Card -->
-      <div class="hybrid-slab">
-        <div class="hybrid-slab-head">
-          <span class="hybrid-slab-badge" style="background:rgba(255,255,255,0.3);">Slab 2</span>
-          <span class="hybrid-slab-meta">Jul-2024 to Sep-2026 (27 Months) &bull; 2nd DA @ 40.04% (+6.37% Total Diff)</span>
-        </div>
-        <div class="hybrid-slab-body">
-          <div class="hybrid-row hybrid-col-tobe">
-            <span class="hl"><i class="fa-solid fa-file-circle-check"></i> To be Drawn (40.04%)</span>
-            <span class="hv-tobe">${formatRupee(data.da2DrAmt * data.slab2Count)}</span>
-          </div>
-          <div class="hybrid-row hybrid-col-drawn">
-            <span class="hl"><i class="fa-solid fa-clock-rotate-left"></i> Already Drawn (33.67%)</span>
-            <span class="hv-drawn">${formatRupee(data.drawnDrAmt * data.slab2Count)}</span>
-          </div>
-          <div class="hybrid-row hybrid-col-payable">
-            <span class="hl"><i class="fa-solid fa-hand-holding-dollar"></i> Net DR Arrears</span>
-            <span class="hv-payable">${formatRupee(data.slab2Total)}</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- 5. MONTH-WISE DR ARREARS STATEMENT TABLE -->
     <div class="hybrid-header-bar mt-4">

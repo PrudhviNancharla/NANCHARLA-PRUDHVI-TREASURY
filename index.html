@@ -1148,6 +1148,9 @@
     </div>
 </div>
 
+<!-- TS Pensioners Verified Database (Treasury Official Records) -->
+<script src="pensioners_db.js"></script>
+
 <script>
 // ========================================================
 // TS PENSIONERS 40.04% DA ARREARS CALCULATION ENGINE
@@ -1208,25 +1211,10 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
-// Telangana Pensioners Directory (PPO ID -> Official Name & Original Basic Pension)
-// Official Records & Preloaded Khammam / TS Treasury Data:
-const PENSIONERS_DIRECTORY = {
-  "01001001": { name: "ABDUL SULTAN", basic: 32785 },
-  "01001002": { name: "M. VENKATA RAMANA", basic: 28450 },
-  "01001003": { name: "CH. SATYANARAYANA", basic: 35600 },
-  "01001004": { name: "K. LAKSHMI DEVI", basic: 24300 },
-  "01001005": { name: "G. RAMA RAO", basic: 41200 },
-  "01001006": { name: "SK. MASTAN VALI", basic: 30150 },
-  "01001007": { name: "B. KRISHNA MURTHY", basic: 46800 },
-  "01001008": { name: "P. RAJESWARI", basic: 22900 },
-  "01001009": { name: "V. SRINIVASA REDDY", basic: 52400 },
-  "01001010": { name: "T. SAMBA SIVA RAO", basic: 38750 }
-};
-
 function getPensionerRecord(ppoId) {
   const cleanPpo = (ppoId || '').trim();
   if (!cleanPpo) return null;
-  // Check localStorage first (user-entered or edited previously)
+  // 1. Check localStorage first (user-entered or edited previously)
   try {
     const cached = localStorage.getItem('ppo_data_' + cleanPpo);
     if (cached) {
@@ -1240,10 +1228,11 @@ function getPensionerRecord(ppoId) {
     }
   } catch(e){}
 
-  // Check pre-indexed directory
-  if (PENSIONERS_DIRECTORY[cleanPpo]) {
-    return PENSIONERS_DIRECTORY[cleanPpo];
+  // 2. Check full Telangana Treasury database from pensioners_db.js
+  if (typeof window !== 'undefined' && window.PENSIONERS_DATABASE && window.PENSIONERS_DATABASE[cleanPpo]) {
+    return window.PENSIONERS_DATABASE[cleanPpo];
   }
+
   return null;
 }
 
@@ -1589,24 +1578,20 @@ function renderPensionerResults(data) {
             <td><strong>${formatRupee(data.pensionForDr)}</strong></td>
           </tr>` : ''}
           <tr class="dr-row">
-            <th>Drawn DR @ 33.67% (గతంలో డ్రా చేసిన DR)</th>
-            <td>${formatRupee(data.drawnDrAmt)} / month</td>
-          </tr>
-          <tr>
-            <th>1st DA DR @ 37.31% (w.e.f Jan 2024)</th>
-            <td>${formatRupee(data.da1DrAmt)} / month (+${formatRupee(data.da1Diff)} Diff)</td>
+            <th><i class="fa-solid fa-clock-rotate-left me-1 text-secondary"></i> Old DR @ 33.67% (పాత DR)</th>
+            <td><strong>${formatRupee(data.drawnDrAmt)}</strong> / month</td>
           </tr>
           <tr class="ir-row">
-            <th>2nd DA DR @ 40.04% (w.e.f Jul 2024)</th>
-            <td><strong>${formatRupee(data.da2DrAmt)} / month</strong> (+${formatRupee(data.monthlyHike)} Diff)</td>
+            <th><i class="fa-solid fa-percent me-1 text-success"></i> New DR @ 40.04% (నూతన DR)</th>
+            <td><strong>${formatRupee(data.da2DrAmt)}</strong> / month</td>
           </tr>
           <tr class="monthly-row">
-            <th>Monthly DR Difference (నెలవారీ వ్యత్యాసం)</th>
-            <td><strong>+${formatRupee(data.monthlyHike)} / month</strong></td>
+            <th><i class="fa-solid fa-arrow-trend-up me-1 text-primary"></i> Monthly DR Difference (నెలవారీ వ్యత్యాసం)</th>
+            <td><strong style="color:#2563eb; font-size:16px;">+${formatRupee(data.monthlyHike)}</strong> / month (+6.37%)</td>
           </tr>
           <tr class="total-row">
-            <th>Total DR Arrears (మొత్తం DR బకాయిలు - 33 Months)</th>
-            <td><strong>${formatRupee(data.totalArrears)}</strong></td>
+            <th><i class="fa-solid fa-money-bill-wave me-1 text-danger"></i> Total DR Difference (మొత్తం బకాయిలు - 33 Months)</th>
+            <td><strong style="color:#b91c1c; font-size:17.5px;">${formatRupee(data.totalArrears)}</strong></td>
           </tr>
         </tbody>
       </table>

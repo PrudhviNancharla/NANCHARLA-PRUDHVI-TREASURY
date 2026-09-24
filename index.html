@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-IN">
 <head>
     <meta charset="utf-8">
@@ -1472,6 +1472,161 @@
         .kfig-lab { font-size: 9.5px !important; }
         .kfig-val { font-size: 14.5px !important; }
     }
+    /* Author Hero Card at Top */
+    .author-hero-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: linear-gradient(#ffffff, #ffffff) padding-box,
+                  linear-gradient(135deg, #10b981 0%, #f59e0b 35%, #047857 70%, #fbbf24 100%) border-box;
+      border: 2px solid transparent;
+      border-radius: 50px;
+      padding: 8px 24px 8px 10px;
+      margin: 14px auto 22px;
+      box-shadow: 0 4px 18px -2px rgba(16, 185, 129, 0.22), 0 2px 10px -1px rgba(245, 158, 11, 0.18);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      max-width: 580px;
+      width: max-content;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .author-hero-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -2px rgba(16, 185, 129, 0.32), 0 4px 14px -1px rgba(245, 158, 11, 0.28);
+    }
+    .author-photo-wrapper {
+      position: relative;
+      width: 62px;
+      height: 62px;
+      flex-shrink: 0;
+    }
+    .author-photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 18%;
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 0 2.5px #059669, 0 0 14px rgba(16, 185, 129, 0.45);
+      display: block;
+      background: #f1f5f9;
+    }
+    .author-badge-check {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      background: linear-gradient(135deg, #059669 0%, #d97706 100%);
+      color: #ffffff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    }
+    .author-details { display: flex; flex-direction: column; }
+    .author-prep-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #b45309;
+      line-height: 1.2;
+    }
+    .author-name {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      line-height: 1.25;
+      margin: 2px 0 1px 0;
+      color: #064e3b;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .author-designation {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #475569;
+      line-height: 1.2;
+    }
+    @media (max-width: 576px) {
+      .author-hero-card {
+        border-radius: 20px;
+        padding: 8px 14px;
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+      }
+      .author-photo-wrapper { width: 50px; height: 50px; }
+      .author-name { font-size: 1rem; }
+      .author-designation { font-size: 0.72rem; }
+    }
+
+    /* Action Tools Bar */
+    .calc-actions-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 24px auto 16px;
+    }
+    .btn-calc-act {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      text-decoration: none !important;
+    }
+    .btn-calc-act:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+    .btn-act-print { background: #1e3a8a; color: #fff !important; }
+    .btn-act-copy { background: #059669; color: #fff !important; }
+    .btn-act-csv { background: #d97706; color: #fff !important; }
+    .btn-act-wa { background: #128c7e; color: #fff !important; }
+
+    /* Quick Stage Pills */
+    .stage-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .stage-pill {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 6px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      color: #1e3a8a;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .stage-pill:hover, .stage-pill.active {
+      background: #1e3a8a;
+      color: #ffffff;
+      border-color: #1e3a8a;
+    }
+    .form-box-enhanced {
+      max-width: 680px !important;
+    }
 </style>
 </head>
 <body>
@@ -1510,6 +1665,20 @@
                 </h1>
             </div>
         </header>
+                <!-- AUTHOR HERO CARD (NANCHARLA PRUDHVI) -->
+        <div class="author-hero-card google-anno-skip">
+            <div class="author-photo-wrapper">
+                <img src="prudhvi.jpg" alt="Nancharla Prudhvi" class="author-photo" width="62" height="62" loading="eager">
+                <span class="author-badge-check" title="Official Contributor">&#10003;</span>
+            </div>
+            <div class="author-details">
+                <span class="author-prep-title">TS PENSIONERS DA &amp; DR ARREARS TABLES FORMULATED BY</span>
+                <div class="author-name">
+                    <span>&#10024; NANCHARLA PRUDHVI &#10024;</span>
+                </div>
+                <div class="author-designation">Senior Accountant, District Treasury, Khammam</div>
+            </div>
+        </div>
 
         <!-- AUTO-AD PURGER SCRIPT FOR HEADER -->
         <script>
@@ -1530,45 +1699,161 @@
         
         
                 <!-- 4. ATTRACTIVE USER FORM BOX (Clean placeholder, no real PPO ID) -->
-        <form method="post" class="form-box-container" onsubmit="handleSubmit(event)">
-            <label for="ppoid" class="form-label-custom">
-                <i class="fa-solid fa-id-card text-primary"></i>
-                <span>Enter PPO ID Number</span>
-            </label>
-            <input type="tel" 
-                   class="form-input-custom" 
-                   id="ppoid" 
-                   name="ppoid" 
-                   inputmode="numeric" 
-                   pattern="[0-9]+" 
-                   maxlength="15" 
-                   oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
-                   required 
-                   autocomplete="off" 
-                   autofocus
-                   value="" 
-                   placeholder="Enter PPO ID">
-            <div class="form-helper-text">
-                <i class="fa-solid fa-circle-info text-primary me-1"></i> Enter numeric PPO ID digits only
+                        <!-- 4. PENSIONERS DA ARREARS CALCULATOR FORM -->
+        <div class="form-box-container form-box-enhanced">
+            <div class="text-center mb-3">
+                <span class="badge bg-primary-subtle text-primary px-3 py-1 rounded-pill fw-bold" style="font-size: 13px; letter-spacing: 0.3px;">
+                    <i class="fa-solid fa-chart-line me-1"></i> RPS 2020 &bull; 1st DA @37.31% &amp; 2nd DA @40.04% (Jan 2024 &ndash; Sep 2026)
+                </span>
             </div>
 
-            <div class="ad-slot-box">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-3444906366314986"
-                     data-ad-slot="7448883835"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+            <form id="pensionerDaForm" onsubmit="calculatePensionerArrears(event)">
+                <div class="row g-3">
+                    <!-- Basic Pension Input -->
+                    <div class="col-12 col-md-7">
+                        <label for="basicPension" class="form-label-custom">
+                            <i class="fa-solid fa-indian-rupee-sign text-primary"></i>
+                            <span>Basic Pension / &#3118;&#3138;&#3122; &#3114;&#3112;&#3149;&#3127;&#3112;&#3149; (&amp;#8377;)</span>
+                            <span class="text-danger fw-bold">*</span>
+                        </label>
+                        <input type="number" 
+                               class="form-input-custom" 
+                               id="basicPension" 
+                               name="basicPension" 
+                               min="5000" 
+                               max="250000" 
+                               step="10" 
+                               required 
+                               autocomplete="off" 
+                               value="30000" 
+                               placeholder="e.g. 30000"
+                               oninput="handlePensionInputChange()">
+                        <div class="form-helper-text">
+                            <i class="fa-solid fa-circle-info text-primary me-1"></i> Service / Family Pension (Full Basic without commutation)
+                        </div>
+                    </div>
 
-            <button type="submit" id="btnSubmit" class="btn-submit-custom" aria-label="Calculate DA Arrears">
-                <i class="fa-solid fa-calculator me-1"></i>
-                <span>Calculate DA Arrears</span>
-            </button>
-        </form>
+                    <!-- RPS-2020 Stage Dropdown -->
+                    <div class="col-12 col-md-5">
+                        <label for="pensionStageSelect" class="form-label-custom">
+                            <i class="fa-solid fa-list-check text-primary"></i>
+                            <span>RPS-2020 Stage</span>
+                        </label>
+                        <select id="pensionStageSelect" class="form-input-custom" style="font-size: 13.5px; font-weight: 600;" onchange="handleStageSelect(this.value)">
+                            <option value="">Choose Stage...</option>
+                        </select>
+                        <div class="form-helper-text">Quick select standard pension stage</div>
+                    </div>
+
+                    <!-- Quick Sample Stage Pills -->
+                    <div class="col-12">
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <small class="fw-bold text-muted" style="font-size:12px;">Quick Pick:</small>
+                            <button type="button" class="stage-pill" onclick="loadSamplePension(15520)">&#8377;15,520</button>
+                            <button type="button" class="stage-pill" onclick="loadSamplePension(20000)">&#8377;20,000</button>
+                            <button type="button" class="stage-pill" onclick="loadSamplePension(25660)">&#8377;25,660</button>
+                            <button type="button" class="stage-pill active" onclick="loadSamplePension(30000)">&#8377;30,000</button>
+                            <button type="button" class="stage-pill" onclick="loadSamplePension(35500)">&#8377;35,500</button>
+                            <button type="button" class="stage-pill" onclick="loadSamplePension(41550)">&#8377;41,550</button>
+                            <button type="button" class="stage-pill" onclick="loadSamplePension(50935)">&#8377;50,935</button>
+                        </div>
+                    </div>
+
+                    <!-- PPO ID (Optional) -->
+                    <div class="col-12 col-md-6">
+                        <label for="ppoid" class="form-label-custom">
+                            <i class="fa-solid fa-id-card text-primary"></i>
+                            <span>PPO ID / &#3114;&#3135;.&#3114;&#3135;.&#3116; &#3112;&#3116;&#3149;&#3116;&#3120;&#3149;</span>
+                            <span class="badge bg-light text-muted border ms-1" style="font-size: 11px;">Optional</span>
+                        </label>
+                        <input type="text" 
+                               class="form-input-custom" 
+                               id="ppoid" 
+                               name="ppoid" 
+                               maxlength="20" 
+                               placeholder="e.g. 01020304" 
+                               value="">
+                        <div class="form-helper-text">Appears on printable statement</div>
+                    </div>
+
+                    <!-- Commutation -->
+                    <div class="col-12 col-md-6">
+                        <label for="commutation" class="form-label-custom">
+                            <i class="fa-solid fa-receipt text-warning"></i>
+                            <span>Commutation / &#3115;&#3118;&#3149;&#3119;&#3137;&#3119;&#3143;&#3127;&#3112;&#3149; (&amp;#8377;)</span>
+                            <span class="badge bg-light text-muted border ms-1" style="font-size: 11px;">Default 0</span>
+                        </label>
+                        <input type="number" 
+                               class="form-input-custom" 
+                               id="commutation" 
+                               name="commutation" 
+                               min="0" 
+                               step="1" 
+                               placeholder="0" 
+                               value="0" 
+                               oninput="handlePensionInputChange()">
+                        <div class="form-helper-text">Monthly commutation deduction if any</div>
+                    </div>
+
+                    <!-- Pensioner Age Group / Additional Quantum -->
+                    <div class="col-12 col-md-6">
+                        <label for="ageGroup" class="form-label-custom">
+                            <i class="fa-solid fa-user-clock text-info"></i>
+                            <span>Pensioner Age / &#3077;&#3110;&#3112;&#3114;&#3133; &#3114;&#3112;&#3149;&#3127;&#3112;&#3149;</span>
+                        </label>
+                        <select id="ageGroup" name="ageGroup" class="form-input-custom" style="font-size: 13.5px; font-weight: 600;" onchange="handlePensionInputChange()">
+                            <option value="0" selected>Age Below 75 Years (No AQ)</option>
+                            <option value="0.15">75 to 79 Years (+15% of Basic)</option>
+                            <option value="0.20">80 to 84 Years (+20% of Basic)</option>
+                            <option value="0.30">85 to 89 Years (+30% of Basic)</option>
+                            <option value="0.40">90 to 94 Years (+40% of Basic)</option>
+                            <option value="0.50">95 to 99 Years (+50% of Basic)</option>
+                            <option value="1.00">100 Years &amp; Above (+100% of Basic)</option>
+                        </select>
+                        <div class="form-helper-text">Additional Quantum for 75+ pensioners</div>
+                    </div>
+
+                    <!-- Arrears Start Month -->
+                    <div class="col-12 col-md-6">
+                        <label for="startMonthSelect" class="form-label-custom">
+                            <i class="fa-solid fa-calendar-days text-success"></i>
+                            <span>Arrears From / &#3114;&#3149;&#3120;&#3134;&#3120;&#3073;&#3117; &#3112;&#3142;&#3122;</span>
+                        </label>
+                        <select id="startMonthSelect" name="startMonthSelect" class="form-input-custom" style="font-size: 13.5px; font-weight: 600;" onchange="handlePensionInputChange()">
+                            <!-- Generated by JS -->
+                        </select>
+                        <div class="form-helper-text">Jan 2024 or retirement month</div>
+                    </div>
+
+                    <!-- Installments choice -->
+                    <div class="col-12">
+                        <label for="installmentCount" class="form-label-custom">
+                            <i class="fa-solid fa-divide text-primary"></i>
+                            <span>Arrears Installments / &#3125;&#3134;&#3119;&#3135;&#3110;&#3134;&#3122; &#3125;&#3135;&#3117;&#3116;&#3112;</span>
+                        </label>
+                        <select id="installmentCount" name="installmentCount" class="form-input-custom" style="font-size: 13.5px; font-weight: 600;" onchange="handlePensionInputChange()">
+                            <option value="8" selected>8 Installments / 8 &#3125;&#3134;&#3119;&#3135;&#3110;&#3134;&#3122;&#3137; (Standard Govt Order)</option>
+                            <option value="12">12 Installments / 12 &#3125;&#3134;&#3119;&#3135;&#3110;&#3134;&#3122;&#3137;</option>
+                            <option value="17">17 Installments / 17 &#3125;&#3134;&#3119;&#3135;&#3110;&#3134;&#3122;&#3137; (CPS Model)</option>
+                            <option value="1">Lump Sum (Single Payment) / &#3091;&#3093;&#3143;&#3128;&#3134;&#3120;&#3135; &#3114;&#3142;&#3074;&#3127;&#3112;&#3149;</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column flex-sm-row gap-2 mt-4">
+                    <button type="submit" id="btnSubmit" class="btn-submit-custom flex-grow-1" style="margin-top:0;" aria-label="Calculate DA Arrears">
+                        <i class="fa-solid fa-calculator me-1"></i>
+                        <span>Calculate DA Arrears / &#3077;&#3120;&#3135;&#3119;&#3120;&#3149;&#3128;&#3149; &#3122;&#3142;&#3115;&#3149;&#3115;&#3135;&#3073;&#3114;&#3073;&#3105;&#3135;</span>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary fw-bold px-3 py-2 rounded-3" style="border-radius:12px; height:52px;" onclick="loadSamplePension(30000)">
+                        <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Sample &#8377;30,000
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- RESULTS CONTAINER: POPULATED IN THIS EXACT MODEL -->
+        <div id="resultsContainer" class="mt-4" style="display:none;"></div>
                 
         
         <!-- ========================================================
@@ -2319,6 +2604,161 @@
   z-index: -99999 !important;
   overflow: hidden !important;
 }
+    /* Author Hero Card at Top */
+    .author-hero-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: linear-gradient(#ffffff, #ffffff) padding-box,
+                  linear-gradient(135deg, #10b981 0%, #f59e0b 35%, #047857 70%, #fbbf24 100%) border-box;
+      border: 2px solid transparent;
+      border-radius: 50px;
+      padding: 8px 24px 8px 10px;
+      margin: 14px auto 22px;
+      box-shadow: 0 4px 18px -2px rgba(16, 185, 129, 0.22), 0 2px 10px -1px rgba(245, 158, 11, 0.18);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      max-width: 580px;
+      width: max-content;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .author-hero-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -2px rgba(16, 185, 129, 0.32), 0 4px 14px -1px rgba(245, 158, 11, 0.28);
+    }
+    .author-photo-wrapper {
+      position: relative;
+      width: 62px;
+      height: 62px;
+      flex-shrink: 0;
+    }
+    .author-photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 18%;
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 0 2.5px #059669, 0 0 14px rgba(16, 185, 129, 0.45);
+      display: block;
+      background: #f1f5f9;
+    }
+    .author-badge-check {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      background: linear-gradient(135deg, #059669 0%, #d97706 100%);
+      color: #ffffff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    }
+    .author-details { display: flex; flex-direction: column; }
+    .author-prep-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #b45309;
+      line-height: 1.2;
+    }
+    .author-name {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      line-height: 1.25;
+      margin: 2px 0 1px 0;
+      color: #064e3b;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .author-designation {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #475569;
+      line-height: 1.2;
+    }
+    @media (max-width: 576px) {
+      .author-hero-card {
+        border-radius: 20px;
+        padding: 8px 14px;
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+      }
+      .author-photo-wrapper { width: 50px; height: 50px; }
+      .author-name { font-size: 1rem; }
+      .author-designation { font-size: 0.72rem; }
+    }
+
+    /* Action Tools Bar */
+    .calc-actions-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 24px auto 16px;
+    }
+    .btn-calc-act {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      text-decoration: none !important;
+    }
+    .btn-calc-act:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+    .btn-act-print { background: #1e3a8a; color: #fff !important; }
+    .btn-act-copy { background: #059669; color: #fff !important; }
+    .btn-act-csv { background: #d97706; color: #fff !important; }
+    .btn-act-wa { background: #128c7e; color: #fff !important; }
+
+    /* Quick Stage Pills */
+    .stage-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .stage-pill {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 6px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      color: #1e3a8a;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .stage-pill:hover, .stage-pill.active {
+      background: #1e3a8a;
+      color: #ffffff;
+      border-color: #1e3a8a;
+    }
+    .form-box-enhanced {
+      max-width: 680px !important;
+    }
 </style>
 
 <div class="pcm-card-main google-anno-skip" data-nosnippet data-ad-skip="true">
@@ -3630,25 +4070,711 @@ try {
     </div>
 </div>
 <script>
-function resetNewdaButton() {
-    const btn = document.getElementById('btnSubmit');
-    if (btn) {
-        btn.innerHTML = '<i class="fa-solid fa-calculator me-2"></i> Calculate DA Arrears';
-        btn.style.pointerEvents = '';
-        btn.style.opacity = '';
-    }
+// ========================================================
+// TS PENSIONERS 40.04% DA ARREARS CALCULATION ENGINE
+// Formulated by Nancharla Prudhvi, Senior Accountant, District Treasury, Khammam
+// Baseline Drawn DR: 33.67% (w.e.f Jul-2023)
+// 1st DR: 37.31% (+3.64% w.e.f Jan-2024)
+// 2nd DR: 40.04% (+2.73% w.e.f Jul-2024 | Total Diff: +6.37%)
+// Period: Jan-2024 to Sep-2026 (33 Months)
+// ========================================================
+
+const TS_PENSION_RPS2020_STAGES = [
+  9500, 9820, 10140, 10460, 10790, 11120, 11450, 11795, 12140, 12485,
+  12845, 13205, 13565, 13940, 14315, 14690, 15105, 15520, 15935, 16405,
+  16875, 17345, 17860, 18375, 18890, 19445, 20000, 20555, 21150, 21745,
+  22340, 22980, 23620, 24260, 24960, 25660, 26360, 27110, 27860, 28610,
+  29425, 30240, 31055, 31920, 32785, 33650, 34575, 35500, 36425, 37420,
+  38415, 39410, 40480, 41550, 42560, 43755, 44890, 46025, 47235, 48445,
+  49655, 50935, 52215, 53495, 54875, 56255, 57635, 59115, 60595, 62075,
+  63655, 65235, 66815, 68525, 70235, 71945, 73655, 75500, 77345, 79190
+];
+
+const ARREARS_MONTHS = [
+  { name: 'January 2024', short: 'Jan-24', slab: 1, drawnRate: 0.3367, tobeRate: 0.3731, diffRate: 0.0364 },
+  { name: 'February 2024', short: 'Feb-24', slab: 1, drawnRate: 0.3367, tobeRate: 0.3731, diffRate: 0.0364 },
+  { name: 'March 2024', short: 'Mar-24', slab: 1, drawnRate: 0.3367, tobeRate: 0.3731, diffRate: 0.0364 },
+  { name: 'April 2024', short: 'Apr-24', slab: 1, drawnRate: 0.3367, tobeRate: 0.3731, diffRate: 0.0364 },
+  { name: 'May 2024', short: 'May-24', slab: 1, drawnRate: 0.3367, tobeRate: 0.3731, diffRate: 0.0364 },
+  { name: 'June 2024', short: 'Jun-24', slab: 1, drawnRate: 0.3367, tobeRate: 0.3731, diffRate: 0.0364 },
+  { name: 'July 2024', short: 'Jul-24', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'August 2024', short: 'Aug-24', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'September 2024', short: 'Sep-24', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'October 2024', short: 'Oct-24', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'November 2024', short: 'Nov-24', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'December 2024', short: 'Dec-24', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'January 2025', short: 'Jan-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'February 2025', short: 'Feb-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'March 2025', short: 'Mar-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'April 2025', short: 'Apr-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'May 2025', short: 'May-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'June 2025', short: 'Jun-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'July 2025', short: 'Jul-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'August 2025', short: 'Aug-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'September 2025', short: 'Sep-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'October 2025', short: 'Oct-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'November 2025', short: 'Nov-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'December 2025', short: 'Dec-25', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'January 2026', short: 'Jan-26', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'February 2026', short: 'Feb-26', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'March 2026', short: 'Mar-26', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'April 2026', short: 'Apr-26', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'May 2026', short: 'May-26', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'June 2026', short: 'Jun-26', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'July 2026', short: 'Jul-26', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'August 2026', short: 'Aug-26', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 },
+  { name: 'September 2026', short: 'Sep-26', slab: 2, drawnRate: 0.3367, tobeRate: 0.4004, diffRate: 0.0637 }
+];
+
+function formatRupee(num) {
+  return 'â‚¹' + Math.round(num || 0).toLocaleString('en-IN');
 }
-function handleSubmit(e) {
-    const btn = document.getElementById('btnSubmit');
-    if (btn) {
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Please wait...';
-        btn.style.pointerEvents = 'none';
-        btn.style.opacity = '0.8';
-        setTimeout(resetNewdaButton, 10000);
-    }
+
+// Populate Dropdowns on Load
+function initPensionerCalculator() {
+  const stageSelect = document.getElementById('pensionStageSelect');
+  if (stageSelect && stageSelect.options.length <= 1) {
+    TS_PENSION_RPS2020_STAGES.forEach(stage => {
+      const opt = document.createElement('option');
+      opt.value = stage;
+      opt.textContent = `â‚¹${stage.toLocaleString('en-IN')}`;
+      stageSelect.appendChild(opt);
+    });
+  }
+
+  const startMonthSelect = document.getElementById('startMonthSelect');
+  if (startMonthSelect && startMonthSelect.options.length === 0) {
+    ARREARS_MONTHS.forEach((m, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = `${m.name} ${idx === 0 ? '(Full 33 Months)' : ''}`;
+      if (idx === 0) opt.selected = true;
+      startMonthSelect.appendChild(opt);
+    });
+  }
+
+  // Auto-calculate sample on initial load
+  calculatePensionerArrears();
 }
-window.addEventListener('pageshow', function() {
-    resetNewdaButton();
-});
+
+function handleStageSelect(val) {
+  if (!val) return;
+  document.getElementById('basicPension').value = val;
+  updateStagePillActive(val);
+  calculatePensionerArrears();
+}
+
+function loadSamplePension(val) {
+  document.getElementById('basicPension').value = val;
+  const stageSelect = document.getElementById('pensionStageSelect');
+  if (stageSelect) stageSelect.value = val;
+  updateStagePillActive(val);
+  calculatePensionerArrears();
+}
+
+function updateStagePillActive(val) {
+  document.querySelectorAll('.stage-pill').forEach(pill => {
+    pill.classList.toggle('active', pill.textContent.replace(/[â‚¹,]/g, '').trim() == val);
+  });
+}
+
+function handlePensionInputChange() {
+  calculatePensionerArrears();
+}
+
+// MAIN CALCULATION FUNCTION
+function calculatePensionerArrears(e) {
+  if (e && typeof e.preventDefault === 'function') e.preventDefault();
+
+  const basicInput = document.getElementById('basicPension');
+  const basic = Math.max(1000, parseFloat(basicInput ? basicInput.value : 30000) || 30000);
+  const ppoId = (document.getElementById('ppoid') && document.getElementById('ppoid').value.trim()) || '';
+  const commutation = Math.max(0, parseFloat(document.getElementById('commutation') ? document.getElementById('commutation').value : 0) || 0);
+  const aqRate = parseFloat(document.getElementById('ageGroup') ? document.getElementById('ageGroup').value : 0) || 0;
+  const startIdx = parseInt(document.getElementById('startMonthSelect') ? document.getElementById('startMonthSelect').value : 0) || 0;
+  const installments = parseInt(document.getElementById('installmentCount') ? document.getElementById('installmentCount').value : 8) || 8;
+
+  // Rate Constants
+  const drawnDrRate = 0.3367; // 33.67%
+  const da1Rate = 0.3731;     // 37.31% (+3.64%)
+  const da2Rate = 0.4004;     // 40.04% (+2.73% / Total +6.37%)
+  const medAllowance = 450;    // Standard Medical Allowance
+
+  // Pension Details
+  const aqBasic = Math.round(basic * aqRate);
+  const pensionForDr = basic + aqBasic;
+  const reducedPension = Math.max(0, basic - commutation);
+
+  // Present Drawn (Jul-23 Rate: 33.67%)
+  const drawnDrAmt = Math.round(pensionForDr * drawnDrRate);
+  const oldGross = basic + aqBasic + drawnDrAmt + medAllowance;
+  const oldNet = Math.max(0, oldGross - commutation);
+
+  // 1st DA (Jan-24 Rate: 37.31%)
+  const da1DrAmt = Math.round(pensionForDr * da1Rate);
+  const da1Gross = basic + aqBasic + da1DrAmt + medAllowance;
+  const da1Diff = da1DrAmt - drawnDrAmt;
+
+  // 2nd DA (Jul-24 Rate: 40.04%)
+  const da2DrAmt = Math.round(pensionForDr * da2Rate);
+  const newGross = basic + aqBasic + da2DrAmt + medAllowance;
+  const newNet = Math.max(0, newGross - commutation);
+  const da2Diff = da2DrAmt - drawnDrAmt; // Total monthly diff w.e.f Jul 2024
+  const monthlyHike = da2Diff;
+
+  // Month-wise Arrears Statement Calculation
+  let slab1Total = 0;
+  let slab1Count = 0;
+  let slab2Total = 0;
+  let slab2Count = 0;
+  let totalArrears = 0;
+
+  const monthRows = [];
+
+  ARREARS_MONTHS.forEach((m, idx) => {
+    const isApplicable = idx >= startIdx;
+    let tobeDr = 0;
+    let drawnDr = 0;
+    let diff = 0;
+    let tobeGross = 0;
+    let drawnGross = 0;
+
+    if (isApplicable) {
+      drawnDr = Math.round(pensionForDr * m.drawnRate);
+      tobeDr = Math.round(pensionForDr * m.tobeRate);
+      diff = tobeDr - drawnDr;
+      tobeGross = basic + aqBasic + tobeDr + medAllowance;
+      drawnGross = basic + aqBasic + drawnDr + medAllowance;
+
+      totalArrears += diff;
+      if (m.slab === 1) {
+        slab1Total += diff;
+        slab1Count++;
+      } else {
+        slab2Total += diff;
+        slab2Count++;
+      }
+    }
+
+    monthRows.push({
+      sno: idx + 1,
+      month: m.name,
+      short: m.short,
+      slab: m.slab,
+      isApplicable,
+      basic,
+      aqBasic,
+      tobeRate: (m.tobeRate * 100).toFixed(2) + '%',
+      tobeDr,
+      tobeGross,
+      drawnRate: (m.drawnRate * 100).toFixed(2) + '%',
+      drawnDr,
+      drawnGross,
+      diff
+    });
+  });
+
+  const installmentAmt = Math.round(totalArrears / installments);
+
+  // RENDER HTML IN THE USER'S EXACT MODEL
+  renderPensionerResults({
+    ppoId,
+    basic,
+    commutation,
+    reducedPension,
+    aqRate,
+    aqBasic,
+    pensionForDr,
+    medAllowance,
+    drawnDrRate,
+    drawnDrAmt,
+    oldGross,
+    oldNet,
+    da1Rate,
+    da1DrAmt,
+    da1Diff,
+    da2Rate,
+    da2DrAmt,
+    newGross,
+    newNet,
+    monthlyHike,
+    slab1Total,
+    slab1Count,
+    slab2Total,
+    slab2Count,
+    totalArrears,
+    installments,
+    installmentAmt,
+    monthRows
+  });
+}
+
+function renderPensionerResults(data) {
+  const container = document.getElementById('resultsContainer');
+  if (!container) return;
+
+  const ageText = data.aqRate > 0 ? `+${(data.aqRate * 100).toFixed(0)}% AQ (${formatRupee(data.aqBasic)})` : 'None (<75 Yrs)';
+
+  // Build Month-wise Table Rows
+  let tableRowsHtml = '';
+  let lastSlab = 0;
+
+  data.monthRows.forEach(row => {
+    // Add Slab Separator Header
+    if (row.slab !== lastSlab) {
+      lastSlab = row.slab;
+      if (row.slab === 1) {
+        tableRowsHtml += `
+          <tr class="slab-header-row">
+            <th colspan="13">
+              <div class="slab-header-content slab-header-compact">
+                <span class="slab-badge-title">1st DA Slab (G.O. 1st DA)</span>
+                <span class="slab-period-tag">Jan-2024 to Jun-2024 (6 Months)</span>
+                <span class="rate-chip-hike">37.31% vs 33.67% (+3.64% Diff)</span>
+              </div>
+            </th>
+          </tr>`;
+      } else if (row.slab === 2) {
+        tableRowsHtml += `
+          <tr class="slab-header-row">
+            <th colspan="13">
+              <div class="slab-header-content slab-header-compact">
+                <span class="slab-badge-title" style="background:linear-gradient(135deg,#059669 0%,#10b981 100%);">2nd DA Slab (G.O. 2nd DA)</span>
+                <span class="slab-period-tag">Jul-2024 to Sep-2026 (27 Months)</span>
+                <span class="rate-chip-hike" style="background:#dcfce7;color:#166534;">40.04% vs 33.67% (+6.37% Total Diff)</span>
+              </div>
+            </th>
+          </tr>`;
+      }
+    }
+
+    if (!row.isApplicable) {
+      tableRowsHtml += `
+        <tr style="opacity: 0.55;">
+          <td class="td-sno">${row.sno}</td>
+          <td class="td-month text-muted">${row.short}</td>
+          <td>${formatRupee(row.basic)}</td>
+          <td class="td-age">${data.aqBasic > 0 ? formatRupee(row.aqBasic) : '-'}</td>
+          <td colspan="8" class="text-muted fw-bold fst-italic">Prior to Retirement / Not Applicable</td>
+          <td class="td-arrears" style="color:#64748b !important; background:#f8fafc !important;">â‚¹0</td>
+        </tr>`;
+    } else {
+      tableRowsHtml += `
+        <tr>
+          <td class="td-sno">${row.sno}</td>
+          <td class="td-month">${row.short}</td>
+          <td>${formatRupee(row.basic)}</td>
+          <td class="td-age">${data.aqBasic > 0 ? formatRupee(row.aqBasic) : '-'}</td>
+          <td class="td-tobe fw-bold" style="color:#1e40af;">${row.tobeRate}</td>
+          <td class="td-tobe">${formatRupee(row.tobeDr)}</td>
+          <td class="td-tobe">${formatRupee(row.tobeGross)}</td>
+          <td class="td-drawn fw-bold" style="color:#92400e;">${row.drawnRate}</td>
+          <td class="td-drawn">${formatRupee(row.drawnDr)}</td>
+          <td class="td-drawn">${formatRupee(row.drawnGross)}</td>
+          <td class="td-arrears">${formatRupee(row.diff)}</td>
+        </tr>`;
+    }
+  });
+
+  const ppoLine = data.ppoId ? `<tr class="dr-row"><th>PPO ID Number</th><td><strong>${escapePcmHtml(data.ppoId)}</strong></td></tr>` : '';
+
+  container.innerHTML = `
+    <!-- 1. KEY FIGURES KPI CARDS (MATCHING .kfig MODEL) -->
+    <div class="kfig">
+      <div class="kfig-box kfig-gross">
+        <div class="kfig-icon"><i class="fa-solid fa-wallet"></i></div>
+        <div class="kfig-content">
+          <span class="kfig-lab">Updated Gross Pension</span>
+          <span class="kfig-val">${formatRupee(data.newGross)}</span>
+          <small class="text-muted" style="font-size:11px;">Basic + AQ + DR(40.04%) + MA</small>
+        </div>
+      </div>
+
+      <div class="kfig-box kfig-net">
+        <div class="kfig-icon"><i class="fa-solid fa-building-columns"></i></div>
+        <div class="kfig-content">
+          <span class="kfig-lab">Updated Net Pension</span>
+          <span class="kfig-val">${formatRupee(data.newNet)}</span>
+          <small class="text-muted" style="font-size:11px;">Take-Home to Bank Account</small>
+        </div>
+      </div>
+
+      <div class="kfig-box kfig-da">
+        <div class="kfig-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="kfig-content">
+          <span class="kfig-lab">New DR @ 40.04%</span>
+          <span class="kfig-val">${formatRupee(data.da2DrAmt)}</span>
+          <small class="text-muted" style="font-size:11px;">Previous DR: ${formatRupee(data.drawnDrAmt)}</small>
+        </div>
+      </div>
+
+      <div class="kfig-box kfig-arrears">
+        <div class="kfig-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+        <div class="kfig-content">
+          <span class="kfig-lab">Total Pending Arrears</span>
+          <span class="kfig-val">${formatRupee(data.totalArrears)}</span>
+          <small class="text-muted" style="font-size:11px;">Jan 2024 â€“ Sep 2026</small>
+        </div>
+      </div>
+
+      <div class="kfig-box kfig-instal">
+        <div class="kfig-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <div class="kfig-content">
+          <span class="kfig-lab">Installment (${data.installments}x)</span>
+          <span class="kfig-val">${formatRupee(data.installmentAmt)}</span>
+          <small class="text-muted" style="font-size:11px;">Per Month for ${data.installments} Months</small>
+        </div>
+      </div>
+
+      <div class="kfig-box kfig-inc">
+        <div class="kfig-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+        <div class="kfig-content">
+          <span class="kfig-lab">Monthly Pension Hike</span>
+          <span class="kfig-val">+${formatRupee(data.monthlyHike)}</span>
+          <small class="text-muted" style="font-size:11px;">+6.37% DR Increase in Cash</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PENSIONER MASTER SUMMARY TABLE (MATCHING .summary-attractive MODEL) -->
+    <div class="table-responsive">
+      <table class="summary-attractive">
+        <tbody>
+          ${ppoLine}
+          <tr>
+            <th>Basic Pension (à°®à±‚à°² à°ªà±†à°¨à±à°·à°¨à±)</th>
+            <td><strong>${formatRupee(data.basic)}</strong></td>
+          </tr>
+          ${data.commutation > 0 ? `
+          <tr>
+            <th>Commutation Deduction</th>
+            <td class="text-danger">- ${formatRupee(data.commutation)}</td>
+          </tr>
+          <tr>
+            <th>Reduced Pension</th>
+            <td><strong>${formatRupee(data.reducedPension)}</strong></td>
+          </tr>` : ''}
+          ${data.aqBasic > 0 ? `
+          <tr class="aq-basic-row">
+            <th>Additional Quantum (AQ) Basic</th>
+            <td><strong>+ ${formatRupee(data.aqBasic)}</strong> (${(data.aqRate * 100).toFixed(0)}%)</td>
+          </tr>
+          <tr class="aq-da-row">
+            <th>Pension Considered for DR</th>
+            <td><strong>${formatRupee(data.pensionForDr)}</strong></td>
+          </tr>` : ''}
+          <tr class="dr-row">
+            <th>Drawn DR @ 33.67% (Previous)</th>
+            <td>${formatRupee(data.drawnDrAmt)} / month</td>
+          </tr>
+          <tr>
+            <th>1st DA DR @ 37.31% (w.e.f Jan 2024)</th>
+            <td>${formatRupee(data.da1DrAmt)} / month (+${formatRupee(data.da1Diff)})</td>
+          </tr>
+          <tr class="ir-row">
+            <th>2nd DA DR @ 40.04% (w.e.f Jul 2024)</th>
+            <td><strong>${formatRupee(data.da2DrAmt)} / month</strong> (+${formatRupee(data.monthlyHike)})</td>
+          </tr>
+          <tr>
+            <th>Medical Allowance (MA)</th>
+            <td>${formatRupee(data.medAllowance)}</td>
+          </tr>
+          <tr class="grand-row">
+            <th>Updated Gross Pension</th>
+            <td><strong>${formatRupee(data.newGross)}</strong> / month</td>
+          </tr>
+          <tr class="net-row">
+            <th>Updated Net Pension to Bank</th>
+            <td><strong>${formatRupee(data.newNet)}</strong> / month</td>
+          </tr>
+          <tr class="da-arrears-row">
+            <th>Total DR Arrears (33 Months)</th>
+            <td style="font-size:18px;"><strong>${formatRupee(data.totalArrears)}</strong></td>
+          </tr>
+          <tr class="da-arrears2-row">
+            <th>Installment Breakdown</th>
+            <td><strong>${data.installments} Installments of ${formatRupee(data.installmentAmt)}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 3. DA ARREARS SUMMARY CARDS (MATCHING .da-arr-summary-wrap MODEL) -->
+    <div class="da-arr-summary-wrap">
+      <div class="da-arr-summary-title">
+        <span><i class="fa-solid fa-layer-group me-1"></i> Period-Wise DA Arrears Summary</span>
+      </div>
+      <div class="da-arr-cards">
+        <div class="da-arr-card tone-0">
+          <div class="da-arr-main">
+            <div class="da-arr-card-top">
+              <span class="da-arr-badge">1st DA SLAB</span>
+              <span class="da-arr-go">G.O. 1st DA @ 37.31%</span>
+            </div>
+            <div class="da-arr-period">Jan-2024 to Jun-2024 (${data.slab1Count} Months) â€¢ Rate Diff: +3.64%</div>
+          </div>
+          <div class="da-arr-amt">${formatRupee(data.slab1Total)}</div>
+        </div>
+
+        <div class="da-arr-card tone-1">
+          <div class="da-arr-main">
+            <div class="da-arr-card-top">
+              <span class="da-arr-badge">2nd DA SLAB</span>
+              <span class="da-arr-go">G.O. 2nd DA @ 40.04%</span>
+            </div>
+            <div class="da-arr-period">Jul-2024 to Sep-2026 (${data.slab2Count} Months) â€¢ Rate Diff: +6.37%</div>
+          </div>
+          <div class="da-arr-amt">${formatRupee(data.slab2Total)}</div>
+        </div>
+
+        <div class="da-arr-card tone-total">
+          <div class="da-arr-main">
+            <div class="da-arr-card-top">
+              <span class="da-arr-badge">GRAND TOTAL ARREARS</span>
+              <span class="da-arr-go">Jan 2024 to Sep 2026 (33 Months)</span>
+            </div>
+            <div class="da-arr-period">Paid in ${data.installments} Installments @ ${formatRupee(data.installmentAmt)} / Month</div>
+          </div>
+          <div class="da-arr-amt">${formatRupee(data.totalArrears)}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. HYBRID FINTECH SECTIONS & CARDS REDESIGN (MATCHING .hybrid-block MODEL) -->
+    <div class="hybrid-block">
+      <!-- Section Header -->
+      <div class="hybrid-header-bar">
+        <div class="hhb-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+        <div class="hhb-text">
+          <h2 class="hhb-title">Executive Comparison Snapshot</h2>
+          <span class="hhb-sub">Old DR 33.67% vs Revised 2nd DA 40.04%</span>
+        </div>
+      </div>
+
+      <!-- Snapshot Panel -->
+      <div class="hybrid-panel mb-4">
+        <div class="hybrid-snap-grid">
+          <div class="hybrid-row hybrid-row-old">
+            <span class="hl">Existing DR <span class="hl-rate">33.67%</span></span>
+            <span class="hv">${formatRupee(data.drawnDrAmt)}</span>
+          </div>
+          <div class="hybrid-row hybrid-row-new">
+            <span class="hl">Revised DR <span class="hl-rate">40.04%</span></span>
+            <span class="hv">${formatRupee(data.da2DrAmt)}</span>
+          </div>
+          <div class="hybrid-row hybrid-row-old">
+            <span class="hl">Previous Gross Pension</span>
+            <span class="hv">${formatRupee(data.oldGross)}</span>
+          </div>
+          <div class="hybrid-row hybrid-row-new">
+            <span class="hl">Revised Gross Pension</span>
+            <span class="hv">${formatRupee(data.newGross)}</span>
+          </div>
+          <div class="hybrid-row hybrid-row-old">
+            <span class="hl">Previous Net Pension</span>
+            <span class="hv">${formatRupee(data.oldNet)}</span>
+          </div>
+          <div class="hybrid-row hybrid-row-new">
+            <span class="hl">Revised Net Pension</span>
+            <span class="hv">${formatRupee(data.newNet)}</span>
+          </div>
+        </div>
+        <div class="hybrid-row highlight hybrid-net">
+          <span class="hl">Net Monthly Cash Pension Increase (+6.37% DR Hike)</span>
+          <span class="hv">+${formatRupee(data.monthlyHike)} / Month</span>
+        </div>
+      </div>
+
+      <!-- Grand Total Floating Card -->
+      <div class="hybrid-grand-card">
+        <div class="hgc-inner">
+          <div class="hgc-left">
+            <h3 class="hgc-title">TOTAL PENDING DR ARREARS (2 DAs â€¢ 40.04%)</h3>
+            <div class="hgc-sub">
+              Installment Amount: <span class="hgc-inst-amt">${formatRupee(data.installmentAmt)}</span> Ã— ${data.installments} Months
+            </div>
+          </div>
+          <div class="hgc-right">
+            <div class="hgc-amt-box">
+              <span class="hgc-sym">â‚¹</span>
+              <span class="hgc-val">${Math.round(data.totalArrears).toLocaleString('en-IN')}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Period-Wise Slabs -->
+      <div class="hybrid-header-bar mt-4">
+        <div class="hhb-icon hhb-icon-purple"><i class="fa-solid fa-timeline"></i></div>
+        <div class="hhb-text">
+          <h2 class="hhb-title">Period-Wise Slab Analysis</h2>
+          <span class="hhb-sub">To be Drawn vs Already Drawn vs Payable Arrears</span>
+        </div>
+      </div>
+
+      <!-- Slab 1 Card -->
+      <div class="hybrid-slab">
+        <div class="hybrid-slab-head">
+          <span class="hybrid-slab-badge">Slab 1</span>
+          <span class="hybrid-slab-meta">Jan-2024 to Jun-2024 (6 Months) â€¢ 1st DA @ 37.31% (+3.64% Diff)</span>
+        </div>
+        <div class="hybrid-slab-body">
+          <div class="hybrid-row hybrid-col-tobe">
+            <span class="hl"><i class="fa-solid fa-file-circle-check"></i> To be Drawn (37.31%)</span>
+            <span class="hv hv-tobe">${formatRupee(data.da1DrAmt * data.slab1Count)}</span>
+          </div>
+          <div class="hybrid-row hybrid-col-drawn">
+            <span class="hl"><i class="fa-solid fa-clock-rotate-left"></i> Already Drawn (33.67%)</span>
+            <span class="hv hv-drawn">${formatRupee(data.drawnDrAmt * data.slab1Count)}</span>
+          </div>
+          <div class="hybrid-row hybrid-col-payable highlight">
+            <span class="hl"><i class="fa-solid fa-hand-holding-dollar"></i> Net Arrears Payable</span>
+            <span class="hv hv-payable">${formatRupee(data.slab1Total)}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slab 2 Card -->
+      <div class="hybrid-slab">
+        <div class="hybrid-slab-head">
+          <span class="hybrid-slab-badge" style="background:rgba(255,255,255,0.3);">Slab 2</span>
+          <span class="hybrid-slab-meta">Jul-2024 to Sep-2026 (27 Months) â€¢ 2nd DA @ 40.04% (+6.37% Total Diff)</span>
+        </div>
+        <div class="hybrid-slab-body">
+          <div class="hybrid-row hybrid-col-tobe">
+            <span class="hl"><i class="fa-solid fa-file-circle-check"></i> To be Drawn (40.04%)</span>
+            <span class="hv hv-tobe">${formatRupee(data.da2DrAmt * data.slab2Count)}</span>
+          </div>
+          <div class="hybrid-row hybrid-col-drawn">
+            <span class="hl"><i class="fa-solid fa-clock-rotate-left"></i> Already Drawn (33.67%)</span>
+            <span class="hv hv-drawn">${formatRupee(data.drawnDrAmt * data.slab2Count)}</span>
+          </div>
+          <div class="hybrid-row hybrid-col-payable highlight">
+            <span class="hl"><i class="fa-solid fa-hand-holding-dollar"></i> Net Arrears Payable</span>
+            <span class="hv hv-payable">${formatRupee(data.slab2Total)}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. MONTH-WISE ARREARS STATEMENT TABLE (MATCHING .table-attractive MODEL) -->
+    <div class="hybrid-header-bar mt-4">
+      <div class="hhb-icon"><i class="fa-solid fa-table-list"></i></div>
+      <div class="hhb-text">
+        <h2 class="hhb-title">Month-Wise DR Arrears Statement (Jan 2024 â€“ Sep 2026)</h2>
+        <span class="hhb-sub">Detailed 33-Month Ledger with G.O. Slabs &amp; Differences</span>
+      </div>
+    </div>
+
+    <div class="arrears-table-wrap">
+      <table class="table-attractive">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Month</th>
+            <th>Basic (â‚¹)</th>
+            <th>AQ (â‚¹)</th>
+            <th>To be DR%</th>
+            <th>To be DR (â‚¹)</th>
+            <th>To be Gross (â‚¹)</th>
+            <th>Drawn DR%</th>
+            <th>Drawn DR (â‚¹)</th>
+            <th>Drawn Gross (â‚¹)</th>
+            <th>Difference / Arrears (â‚¹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tableRowsHtml}
+        </tbody>
+        <tfoot>
+          <tr class="tfoot-total-row">
+            <th colspan="10" style="text-align:right;">GRAND TOTAL DR ARREARS (33 MONTHS):</th>
+            <th>${formatRupee(data.totalArrears)}</th>
+          </tr>
+          <tr class="tfoot-inst-header">
+            <th colspan="11">PROPOSED INSTALLMENT DISTRIBUTION SCHEDULE</th>
+          </tr>
+          <tr class="tfoot-slab-row">
+            <th colspan="10">Installment Plan (${data.installments} Equal Monthly Installments):</th>
+            <th>${formatRupee(data.installmentAmt)} / Month</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- 6. ACTION TOOLS BAR -->
+    <div class="calc-actions-bar google-anno-skip">
+      <button type="button" class="btn-calc-act btn-act-print" onclick="window.print()">
+        <i class="fa-solid fa-print"></i>
+        <span>Print Statement / PDF</span>
+      </button>
+      <button type="button" class="btn-calc-act btn-act-copy" onclick="copyPensionSummary()">
+        <i class="fa-solid fa-copy"></i>
+        <span id="copyBtnTxt">Copy Summary</span>
+      </button>
+      <button type="button" class="btn-calc-act btn-act-csv" onclick="exportPensionerCsv()">
+        <i class="fa-solid fa-file-excel"></i>
+        <span>Download CSV</span>
+      </button>
+      <a class="btn-calc-act btn-act-wa" href="https://api.whatsapp.com/send?text=${encodeURIComponent('TS Pensioners 40.04% DA Arrears for Basic Pension ' + formatRupee(data.basic) + ': Total Arrears = ' + formatRupee(data.totalArrears) + ' (Installment: ' + formatRupee(data.installmentAmt) + ' x ' + data.installments + '). Calculated by Nancharla Prudhvi (Treasury, Khammam)')}" target="_blank" rel="noopener">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>Share Result</span>
+      </a>
+    </div>
+  `;
+
+  container.style.display = 'block';
+
+  // Smooth scroll to results
+  setTimeout(() => {
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// Copy Summary Helper
+function copyPensionSummary() {
+  const basic = document.getElementById('basicPension') ? document.getElementById('basicPension').value : '30000';
+  const arrearsTxt = document.querySelector('.hybrid-grand-card .hgc-val') ? document.querySelector('.hybrid-grand-card .hgc-val').innerText : '';
+  const text = `*TS Pensioners 40.04% DA Arrears Summary*\n` +
+               `Basic Pension: â‚¹${Number(basic).toLocaleString('en-IN')}\n` +
+               `Total Pending DR Arrears: â‚¹${arrearsTxt}\n` +
+               `Formulated by: NANCHARLA PRUDHVI, Senior Accountant, District Treasury, Khammam\n` +
+               `Calculator: https://prudhvinancharla.github.io/NANCHARLA-PRUDHVI-TREASURY/`;
+  
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtnTxt');
+      if (btn) {
+        btn.innerText = 'Copied!';
+        setTimeout(() => { btn.innerText = 'Copy Summary'; }, 2000);
+      }
+    });
+  } else {
+    alert(text);
+  }
+}
+
+// Export CSV Helper
+function exportPensionerCsv() {
+  const basic = document.getElementById('basicPension') ? document.getElementById('basicPension').value : '30000';
+  let csv = 'S.No,Month,Basic Pension,AQ Basic,To be DR Rate,To be DR Amount,To be Gross,Drawn DR Rate,Drawn DR Amount,Drawn Gross,DR Arrears\n';
+  
+  const rows = document.querySelectorAll('.table-attractive tbody tr:not(.slab-header-row)');
+  rows.forEach(r => {
+    const cols = Array.from(r.querySelectorAll('td')).map(td => `"${td.innerText.replace(/"/g, '""').trim()}"`);
+    if (cols.length >= 10) {
+      csv += cols.join(',') + '\n';
+    }
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `TS_Pensioners_DA_Arrears_${basic}.csv`;
+  link.click();
+}
+
+window.addEventListener('DOMContentLoaded', initPensionerCalculator);
+window.addEventListener('load', initPensionerCalculator);
 </script>
 </body></html>

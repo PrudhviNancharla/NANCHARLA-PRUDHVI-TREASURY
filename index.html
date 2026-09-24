@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-IN">
 <head>
     <meta charset="utf-8">
@@ -4127,7 +4127,7 @@ const ARREARS_MONTHS = [
 ];
 
 function formatRupee(num) {
-  return 'â‚¹' + Math.round(num || 0).toLocaleString('en-IN');
+  return '\u20B9' + Math.round(num || 0).toLocaleString('en-IN');
 }
 
 // Populate Dropdowns on Load
@@ -4137,7 +4137,7 @@ function initPensionerCalculator() {
     TS_PENSION_RPS2020_STAGES.forEach(stage => {
       const opt = document.createElement('option');
       opt.value = stage;
-      opt.textContent = `â‚¹${stage.toLocaleString('en-IN')}`;
+      opt.textContent = `\u20B9${stage.toLocaleString('en-IN')}`;
       stageSelect.appendChild(opt);
     });
   }
@@ -4174,7 +4174,7 @@ function loadSamplePension(val) {
 
 function updateStagePillActive(val) {
   document.querySelectorAll('.stage-pill').forEach(pill => {
-    pill.classList.toggle('active', pill.textContent.replace(/[â‚¹,]/g, '').trim() == val);
+    pill.classList.toggle('active', pill.textContent.replace(/[\u20B9,₹]/g, '').trim() == val);
   });
 }
 
@@ -4356,7 +4356,7 @@ function renderPensionerResults(data) {
           <td>${formatRupee(row.basic)}</td>
           <td class="td-age">${data.aqBasic > 0 ? formatRupee(row.aqBasic) : '-'}</td>
           <td colspan="8" class="text-muted fw-bold fst-italic">Prior to Retirement / Not Applicable</td>
-          <td class="td-arrears" style="color:#64748b !important; background:#f8fafc !important;">â‚¹0</td>
+          <td class="td-arrears" style="color:#64748b !important; background:#f8fafc !important;">&#8377;0</td>
         </tr>`;
     } else {
       tableRowsHtml += `
@@ -4413,7 +4413,7 @@ function renderPensionerResults(data) {
         <div class="kfig-content">
           <span class="kfig-lab">Total Pending Arrears</span>
           <span class="kfig-val">${formatRupee(data.totalArrears)}</span>
-          <small class="text-muted" style="font-size:11px;">Jan 2024 â€“ Sep 2026</small>
+          <small class="text-muted" style="font-size:11px;">Jan 2024 &ndash; Sep 2026</small>
         </div>
       </div>
 
@@ -4442,7 +4442,7 @@ function renderPensionerResults(data) {
         <tbody>
           ${ppoLine}
           <tr>
-            <th>Basic Pension (à°®à±‚à°² à°ªà±†à°¨à±à°·à°¨à±)</th>
+            <th>Basic Pension (మూల పెన్షన్)</th>
             <td><strong>${formatRupee(data.basic)}</strong></td>
           </tr>
           ${data.commutation > 0 ? `
@@ -4511,7 +4511,7 @@ function renderPensionerResults(data) {
               <span class="da-arr-badge">1st DA SLAB</span>
               <span class="da-arr-go">G.O. 1st DA @ 37.31%</span>
             </div>
-            <div class="da-arr-period">Jan-2024 to Jun-2024 (${data.slab1Count} Months) â€¢ Rate Diff: +3.64%</div>
+            <div class="da-arr-period">Jan-2024 to Jun-2024 (${data.slab1Count} Months) &bull; Rate Diff: +3.64%</div>
           </div>
           <div class="da-arr-amt">${formatRupee(data.slab1Total)}</div>
         </div>
@@ -4522,7 +4522,7 @@ function renderPensionerResults(data) {
               <span class="da-arr-badge">2nd DA SLAB</span>
               <span class="da-arr-go">G.O. 2nd DA @ 40.04%</span>
             </div>
-            <div class="da-arr-period">Jul-2024 to Sep-2026 (${data.slab2Count} Months) â€¢ Rate Diff: +6.37%</div>
+            <div class="da-arr-period">Jul-2024 to Sep-2026 (${data.slab2Count} Months) &bull; Rate Diff: +6.37%</div>
           </div>
           <div class="da-arr-amt">${formatRupee(data.slab2Total)}</div>
         </div>
@@ -4589,14 +4589,14 @@ function renderPensionerResults(data) {
       <div class="hybrid-grand-card">
         <div class="hgc-inner">
           <div class="hgc-left">
-            <h3 class="hgc-title">TOTAL PENDING DR ARREARS (2 DAs â€¢ 40.04%)</h3>
+            <h3 class="hgc-title">TOTAL PENDING DR ARREARS (2 DAs &bull; 40.04%)</h3>
             <div class="hgc-sub">
-              Installment Amount: <span class="hgc-inst-amt">${formatRupee(data.installmentAmt)}</span> Ã— ${data.installments} Months
+              Installment Amount: <span class="hgc-inst-amt">${formatRupee(data.installmentAmt)}</span> &times; ${data.installments} Months
             </div>
           </div>
           <div class="hgc-right">
             <div class="hgc-amt-box">
-              <span class="hgc-sym">â‚¹</span>
+              <span class="hgc-sym">&#8377;</span>
               <span class="hgc-val">${Math.round(data.totalArrears).toLocaleString('en-IN')}</span>
             </div>
           </div>
@@ -4616,7 +4616,7 @@ function renderPensionerResults(data) {
       <div class="hybrid-slab">
         <div class="hybrid-slab-head">
           <span class="hybrid-slab-badge">Slab 1</span>
-          <span class="hybrid-slab-meta">Jan-2024 to Jun-2024 (6 Months) â€¢ 1st DA @ 37.31% (+3.64% Diff)</span>
+          <span class="hybrid-slab-meta">Jan-2024 to Jun-2024 (6 Months) &bull; 1st DA @ 37.31% (+3.64% Diff)</span>
         </div>
         <div class="hybrid-slab-body">
           <div class="hybrid-row hybrid-col-tobe">
@@ -4638,7 +4638,7 @@ function renderPensionerResults(data) {
       <div class="hybrid-slab">
         <div class="hybrid-slab-head">
           <span class="hybrid-slab-badge" style="background:rgba(255,255,255,0.3);">Slab 2</span>
-          <span class="hybrid-slab-meta">Jul-2024 to Sep-2026 (27 Months) â€¢ 2nd DA @ 40.04% (+6.37% Total Diff)</span>
+          <span class="hybrid-slab-meta">Jul-2024 to Sep-2026 (27 Months) &bull; 2nd DA @ 40.04% (+6.37% Total Diff)</span>
         </div>
         <div class="hybrid-slab-body">
           <div class="hybrid-row hybrid-col-tobe">
@@ -4661,7 +4661,7 @@ function renderPensionerResults(data) {
     <div class="hybrid-header-bar mt-4">
       <div class="hhb-icon"><i class="fa-solid fa-table-list"></i></div>
       <div class="hhb-text">
-        <h2 class="hhb-title">Month-Wise DR Arrears Statement (Jan 2024 â€“ Sep 2026)</h2>
+        <h2 class="hhb-title">Month-Wise DR Arrears Statement (Jan 2024 &ndash; Sep 2026)</h2>
         <span class="hhb-sub">Detailed 33-Month Ledger with G.O. Slabs &amp; Differences</span>
       </div>
     </div>
@@ -4672,15 +4672,15 @@ function renderPensionerResults(data) {
           <tr>
             <th>S.No</th>
             <th>Month</th>
-            <th>Basic (â‚¹)</th>
-            <th>AQ (â‚¹)</th>
+            <th>Basic (&#8377;)</th>
+            <th>AQ (&#8377;)</th>
             <th>To be DR%</th>
-            <th>To be DR (â‚¹)</th>
-            <th>To be Gross (â‚¹)</th>
+            <th>To be DR (&#8377;)</th>
+            <th>To be Gross (&#8377;)</th>
             <th>Drawn DR%</th>
-            <th>Drawn DR (â‚¹)</th>
-            <th>Drawn Gross (â‚¹)</th>
-            <th>Difference / Arrears (â‚¹)</th>
+            <th>Drawn DR (&#8377;)</th>
+            <th>Drawn Gross (&#8377;)</th>
+            <th>Difference / Arrears (&#8377;)</th>
           </tr>
         </thead>
         <tbody>
@@ -4736,8 +4736,8 @@ function copyPensionSummary() {
   const basic = document.getElementById('basicPension') ? document.getElementById('basicPension').value : '30000';
   const arrearsTxt = document.querySelector('.hybrid-grand-card .hgc-val') ? document.querySelector('.hybrid-grand-card .hgc-val').innerText : '';
   const text = `*TS Pensioners 40.04% DA Arrears Summary*\n` +
-               `Basic Pension: â‚¹${Number(basic).toLocaleString('en-IN')}\n` +
-               `Total Pending DR Arrears: â‚¹${arrearsTxt}\n` +
+               `Basic Pension: \u20B9${Number(basic).toLocaleString('en-IN')}\n` +
+               `Total Pending DR Arrears: \u20B9${arrearsTxt}\n` +
                `Formulated by: NANCHARLA PRUDHVI, Senior Accountant, District Treasury, Khammam\n` +
                `Calculator: https://prudhvinancharla.github.io/NANCHARLA-PRUDHVI-TREASURY/`;
   
